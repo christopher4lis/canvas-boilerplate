@@ -29,6 +29,8 @@ addEventListener("mousemove", function(event) {
 addEventListener("resize", function() {
 	canvas.width = innerWidth;	
 	canvas.height = innerHeight;
+
+	init();
 });
 
 
@@ -65,7 +67,9 @@ function Object(x, y, radius, color) {
 
 
 // Implementation
+function init() {
 
+}
 
 // Animation Loop
 function animate() {
@@ -75,4 +79,5 @@ function animate() {
 	c.fillText("HTML CANVAS BOILERPLATE", mouse.x, mouse.y);
 }
 
+init();
 animate();
