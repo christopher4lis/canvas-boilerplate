@@ -1,18 +1,18 @@
 // Initial Setup
-var canvas = document.querySelector('canvas');
-var c = canvas.getContext('2d');
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 
 // Variables
-var mouse = {
+const mouse = {
 	x: innerWidth / 2,
 	y: innerHeight / 2 
 };
 
-var colors = [
+const colors = [
 	'#2185C5',
 	'#7ECEFD',
 	'#FFF6E5',
@@ -21,12 +21,12 @@ var colors = [
 
 
 // Event Listeners
-addEventListener("mousemove", function(event) {
+addEventListener("mousemove", event => {
 	mouse.x = event.clientX;
 	mouse.y = event.clientY;
 });
 
-addEventListener("resize", function() {
+addEventListener("resize", () => {
 	canvas.width = innerWidth;	
 	canvas.height = innerHeight;
 
@@ -51,12 +51,11 @@ function Object(x, y, radius, color) {
 	this.radius = radius;
 	this.color = color;
 
-	this.update = function() {
-		
+	this.update = () => {
 		this.draw();
 	};
 
-	this.draw = function() {
+	this.draw = () => {
 		c.beginPath();
 		c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);	
 		c.fillStyle = this.color;

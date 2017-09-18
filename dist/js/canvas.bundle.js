@@ -97,6 +97,8 @@ addEventListener("mousemove", function (event) {
 addEventListener("resize", function () {
 	canvas.width = innerWidth;
 	canvas.height = innerHeight;
+
+	init();
 });
 
 // Utility Functions
@@ -110,27 +112,28 @@ function randomColor(colors) {
 
 // Objects
 function Object(x, y, radius, color) {
+	var _this = this;
+
 	this.x = x;
 	this.y = y;
 	this.radius = radius;
 	this.color = color;
 
 	this.update = function () {
-
-		this.draw();
+		_this.draw();
 	};
 
 	this.draw = function () {
 		c.beginPath();
-		c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-		c.fillStyle = this.color;
+		c.arc(_this.x, _this.y, _this.radius, 0, Math.PI * 2, false);
+		c.fillStyle = _this.color;
 		c.fill();
 		c.closePath();
 	};
 }
 
 // Implementation
-
+function init() {}
 
 // Animation Loop
 function animate() {
@@ -140,6 +143,7 @@ function animate() {
 	c.fillText("HTML CANVAS BOILERPLATE", mouse.x, mouse.y);
 }
 
+init();
 animate();
 
 /***/ })
