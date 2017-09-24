@@ -89,12 +89,12 @@ var mouse = {
 var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
 
 // Event Listeners
-addEventListener("mousemove", function (event) {
+addEventListener('mousemove', function (event) {
 	mouse.x = event.clientX;
 	mouse.y = event.clientY;
 });
 
-addEventListener("resize", function () {
+addEventListener('resize', function () {
 	canvas.width = innerWidth;
 	canvas.height = innerHeight;
 
@@ -133,14 +133,24 @@ function Object(x, y, radius, color) {
 }
 
 // Implementation
-function init() {}
+var objects = void 0;
+function init() {
+	objects = [];
+
+	for (var i = 0; i < 400; i++) {
+		// objects.push();
+	}
+}
 
 // Animation Loop
 function animate() {
 	requestAnimationFrame(animate);
-
 	c.clearRect(0, 0, canvas.width, canvas.height);
-	c.fillText("HTML CANVAS BOILERPLATE", mouse.x, mouse.y);
+
+	c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y);
+	// objects.forEach(object => {
+	// 	object.update();
+	// });
 }
 
 init();
