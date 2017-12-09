@@ -48,18 +48,18 @@ function Object(x, y, radius, color) {
     this.y = y
     this.radius = radius
     this.color = color
+}
 
-    this.update = () => {
-        this.draw()
-    }
+Object.prototype.update = function() {
+    this.draw()
+}
 
-    this.draw = () => {
-        c.beginPath()
-        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
-        c.fillStyle = this.color
-        c.fill()
-        c.closePath()
-    }
+Object.prototype.draw = function() {
+    c.beginPath()
+    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
+    c.fillStyle = this.color
+    c.fill()
+    c.closePath()
 }
 
 // Implementation

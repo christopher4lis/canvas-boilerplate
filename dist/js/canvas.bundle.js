@@ -119,25 +119,23 @@ function distance(x1, y1, x2, y2) {
 
 // Objects
 function Object(x, y, radius, color) {
-    var _this = this;
-
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
-
-    this.update = function () {
-        _this.draw();
-    };
-
-    this.draw = function () {
-        c.beginPath();
-        c.arc(_this.x, _this.y, _this.radius, 0, Math.PI * 2, false);
-        c.fillStyle = _this.color;
-        c.fill();
-        c.closePath();
-    };
 }
+
+Object.prototype.update = function () {
+    this.draw();
+};
+
+Object.prototype.draw = function () {
+    c.beginPath();
+    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    c.fillStyle = this.color;
+    c.fill();
+    c.closePath();
+};
 
 // Implementation
 var objects = void 0;
