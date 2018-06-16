@@ -1,11 +1,11 @@
-// Initial Setup
+import utils from './utils'
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
 canvas.width = innerWidth
 canvas.height = innerHeight
 
-// Variables
 const mouse = {
     x: innerWidth / 2,
     y: innerHeight / 2
@@ -25,22 +25,6 @@ addEventListener('resize', () => {
 
     init()
 })
-
-// Utility Functions
-function randomIntFromRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-function randomColor(colors) {
-    return colors[Math.floor(Math.random() * colors.length)]
-}
-
-function distance(x1, y1, x2, y2) {
-    const xDist = x2 - x1
-    const yDist = y2 - y1
-
-    return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2))
-}
 
 // Objects
 function Object(x, y, radius, color) {

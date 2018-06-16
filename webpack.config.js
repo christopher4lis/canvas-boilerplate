@@ -1,22 +1,25 @@
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     entry: './src/canvas.js',
     output: {
-        path: __dirname + '/dist/js',
-        filename: 'canvas.bundle.js'
+        path: __dirname + '/dist/',
+        filename: './js/canvas.bundle.js'
     },
     module: {
-        loaders: [{
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['env']
+        loaders: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
                 }
             }
-        }]
+        ]
     },
     plugins: [
         new BrowserSyncPlugin({
@@ -25,7 +28,12 @@ module.exports = {
             server: { baseDir: ['dist'] },
             files: ['./dist/*']
         }),
+        new HtmlWebpackPlugin({
+            // Also generate a test.html
+            filename: 'index.html',
+            template: 'src/index.html'
+        })
     ],
     watch: true,
     devtool: 'source-map'
-};
+}

@@ -73,14 +73,18 @@
 "use strict";
 
 
-// Initial Setup
+var _utils = __webpack_require__(1);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-// Variables
 var mouse = {
     x: innerWidth / 2,
     y: innerHeight / 2
@@ -100,22 +104,6 @@ addEventListener('resize', function () {
 
     init();
 });
-
-// Utility Functions
-function randomIntFromRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function randomColor(colors) {
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
-function distance(x1, y1, x2, y2) {
-    var xDist = x2 - x1;
-    var yDist = y2 - y1;
-
-    return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-}
 
 // Objects
 function Object(x, y, radius, color) {
@@ -160,6 +148,30 @@ function animate() {
 
 init();
 animate();
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function randomIntFromRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function randomColor(colors) {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function distance(x1, y1, x2, y2) {
+    var xDist = x2 - x1;
+    var yDist = y2 - y1;
+
+    return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+}
+
+module.exports = { randomIntFromRange: randomIntFromRange, randomColor: randomColor, distance: distance };
 
 /***/ })
 /******/ ]);
