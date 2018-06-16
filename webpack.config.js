@@ -2,13 +2,14 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+    mode: 'development',
     entry: './src/canvas.js',
     output: {
         path: __dirname + '/dist/',
         filename: './js/canvas.bundle.js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
@@ -29,7 +30,6 @@ module.exports = {
             files: ['./dist/*']
         }),
         new HtmlWebpackPlugin({
-            // Also generate a test.html
             filename: 'index.html',
             template: 'src/index.html'
         })
