@@ -34,16 +34,16 @@ function Object(x, y, radius, color) {
     this.color = color
 }
 
-Object.prototype.update = function() {
-    this.draw()
-}
-
 Object.prototype.draw = function() {
     c.beginPath()
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
     c.fillStyle = this.color
     c.fill()
     c.closePath()
+}
+
+Object.prototype.update = function() {
+    this.draw()
 }
 
 // Implementation
