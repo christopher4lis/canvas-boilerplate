@@ -81,22 +81,22 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/canvas.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/canvas.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/canvas.js":
-/*!***********************!*\
-  !*** ./src/canvas.js ***!
-  \***********************/
+/***/ "./src/js/canvas.js":
+/*!**************************!*\
+  !*** ./src/js/canvas.js ***!
+  \**************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _utils = __webpack_require__(/*! ./utils */ "./src/utils.js");
+var _utils = __webpack_require__(/*! ./utils */ "./src/js/utils.js");
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -154,7 +154,7 @@ function init() {
     objects = [];
 
     for (var i = 0; i < 400; i++) {
-        // objects.push();
+        // objects.push()
     }
 }
 
@@ -165,8 +165,8 @@ function animate() {
 
     c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y);
     // objects.forEach(object => {
-    //  object.update();
-    // });
+    //  object.update()
+    // })
 }
 
 init();
@@ -174,10 +174,10 @@ animate();
 
 /***/ }),
 
-/***/ "./src/utils.js":
-/*!**********************!*\
-  !*** ./src/utils.js ***!
-  \**********************/
+/***/ "./src/js/utils.js":
+/*!*************************!*\
+  !*** ./src/js/utils.js ***!
+  \*************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -185,18 +185,18 @@ animate();
 
 
 function randomIntFromRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function randomColor(colors) {
-    return colors[Math.floor(Math.random() * colors.length)];
+  return colors[Math.floor(Math.random() * colors.length)];
 }
 
 function distance(x1, y1, x2, y2) {
-    var xDist = x2 - x1;
-    var yDist = y2 - y1;
+  var xDist = x2 - x1;
+  var yDist = y2 - y1;
 
-    return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
 }
 
 module.exports = { randomIntFromRange: randomIntFromRange, randomColor: randomColor, distance: distance };
