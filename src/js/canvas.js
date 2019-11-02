@@ -7,64 +7,66 @@ canvas.width = innerWidth
 canvas.height = innerHeight
 
 const mouse = {
-    x: innerWidth / 2,
-    y: innerHeight / 2
+  x: innerWidth / 2,
+  y: innerHeight / 2
 }
 
 const colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']
 
 // Event Listeners
-addEventListener('mousemove', event => {
-    mouse.x = event.clientX
-    mouse.y = event.clientY
+addEventListener('mousemove', (event) => {
+  mouse.x = event.clientX
+  mouse.y = event.clientY
 })
 
 addEventListener('resize', () => {
-    canvas.width = innerWidth
-    canvas.height = innerHeight
+  canvas.width = innerWidth
+  canvas.height = innerHeight
 
-    init()
+  init()
 })
 
 // Objects
-function Object(x, y, radius, color) {
+class Object {
+  constructor(x, y, radius, color) {
     this.x = x
     this.y = y
     this.radius = radius
     this.color = color
-}
+  }
 
-Object.prototype.draw = function() {
+  draw() {
     c.beginPath()
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
     c.fillStyle = this.color
     c.fill()
     c.closePath()
-}
+  }
 
-Object.prototype.update = function() {
+  update() {
     this.draw()
+  }
 }
 
 // Implementation
 let objects
 function init() {
-    objects = []
+  objects = []
 
-    for (let i = 0; i < 400; i++) {
-        // objects.push()
-    }
+  for (let i = 0; i < 400; i++) {
+    // objects.push()
+  }
 }
 
 // Animation Loop
 function animate() {
-    requestAnimationFrame(animate)
-    c.clearRect(0, 0, canvas.width, canvas.height)
+  requestAnimationFrame(animate)
+  c.clearRect(0, 0, canvas.width, canvas.height)
 
-    c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y)
-    // objects.forEach(object => {
-    //  object.update()
-    // })
+  c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y)
+  // objects.forEach(object => {
+  //  object.update()
+  // })
 }
 
 init()
