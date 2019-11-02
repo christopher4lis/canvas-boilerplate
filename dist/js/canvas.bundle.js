@@ -90,83 +90,70 @@
 /*!**************************!*\
   !*** ./src/js/canvas.js ***!
   \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-var _utils = __webpack_require__(/*! ./utils */ "./src/js/utils.js");
-
-var _utils2 = _interopRequireDefault(_utils);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
 
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
-
 canvas.width = innerWidth;
 canvas.height = innerHeight;
-
 var mouse = {
-    x: innerWidth / 2,
-    y: innerHeight / 2
+  x: innerWidth / 2,
+  y: innerHeight / 2
 };
+var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']; // Event Listeners
 
-var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
-
-// Event Listeners
 addEventListener('mousemove', function (event) {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
+  mouse.x = event.clientX;
+  mouse.y = event.clientY;
 });
-
 addEventListener('resize', function () {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  init();
+}); // Objects
 
-    init();
-});
-
-// Objects
 function Object(x, y, radius, color) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.color = color;
+  this.x = x;
+  this.y = y;
+  this.radius = radius;
+  this.color = color;
 }
 
 Object.prototype.draw = function () {
-    c.beginPath();
-    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    c.fillStyle = this.color;
-    c.fill();
-    c.closePath();
+  c.beginPath();
+  c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+  c.fillStyle = this.color;
+  c.fill();
+  c.closePath();
 };
 
 Object.prototype.update = function () {
-    this.draw();
-};
+  this.draw();
+}; // Implementation
 
-// Implementation
-var objects = void 0;
+
+var objects;
+
 function init() {
-    objects = [];
+  objects = [];
 
-    for (var i = 0; i < 400; i++) {
-        // objects.push()
-    }
-}
+  for (var i = 0; i < 400; i++) {// objects.push()
+  }
+} // Animation Loop
 
-// Animation Loop
+
 function animate() {
-    requestAnimationFrame(animate);
-    c.clearRect(0, 0, canvas.width, canvas.height);
-
-    c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y);
-    // objects.forEach(object => {
-    //  object.update()
-    // })
+  requestAnimationFrame(animate);
+  c.clearRect(0, 0, canvas.width, canvas.height);
+  c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y); // objects.forEach(object => {
+  //  object.update()
+  // })
 }
 
 init();
@@ -179,10 +166,7 @@ animate();
   !*** ./src/js/utils.js ***!
   \*************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
+/***/ (function(module, exports) {
 
 function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -195,11 +179,14 @@ function randomColor(colors) {
 function distance(x1, y1, x2, y2) {
   var xDist = x2 - x1;
   var yDist = y2 - y1;
-
   return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
 }
 
-module.exports = { randomIntFromRange: randomIntFromRange, randomColor: randomColor, distance: distance };
+module.exports = {
+  randomIntFromRange: randomIntFromRange,
+  randomColor: randomColor,
+  distance: distance
+};
 
 /***/ })
 
