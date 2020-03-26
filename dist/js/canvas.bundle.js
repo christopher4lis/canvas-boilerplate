@@ -86,6 +86,54 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/Dot.js":
+/*!***********************!*\
+  !*** ./src/js/Dot.js ***!
+  \***********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Dot; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Dot =
+/*#__PURE__*/
+function () {
+  function Dot(x, y, r, g, b, imageX, imageY) {
+    _classCallCheck(this, Dot);
+
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.imageX = imageX;
+    this.imageY = imageY;
+  }
+
+  _createClass(Dot, [{
+    key: "draw",
+    value: function draw(c) {
+      c.beginPath();
+      c.arc(this.x, this.y, 2, 0, 2 * Math.PI, false);
+      c.fillStyle = 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')';
+      c.fill();
+    }
+  }]);
+
+  return Dot;
+}();
+
+
+
+/***/ }),
+
 /***/ "./src/js/canvas.js":
 /*!**************************!*\
   !*** ./src/js/canvas.js ***!
@@ -95,116 +143,50 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/js/utils.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_0__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
+/* harmony import */ var _Dot__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Dot */ "./src/js/Dot.js");
 
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
+var img = document.querySelector('img');
 canvas.width = innerWidth;
 canvas.height = innerHeight;
-var mouse = {
-  x: innerWidth / 2,
-  y: innerHeight / 2
-};
-var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']; // Event Listeners
+addEventListener('load', function (e) {
+  c.drawImage(img, 0, 0);
+  var imageData = c.getImageData(0, 0, img.naturalWidth, img.naturalHeight).data;
+  var dots = [];
+  var pixels = [];
 
-addEventListener('mousemove', function (event) {
-  mouse.x = event.clientX;
-  mouse.y = event.clientY;
+  for (var i = 0; i < imageData.length; i += 4) {
+    if (imageData[i] === 0) continue;
+    var x = i / 4 % img.naturalWidth;
+    var y = Math.floor(Math.floor(i / img.naturalWidth) / 4);
+
+    if (x % 5 === 0 && y % 5 === 0) {
+      pixels.push({
+        x: x,
+        y: y,
+        r: imageData[i],
+        g: imageData[i + 1],
+        b: imageData[i + 2]
+      });
+    }
+  }
+
+  pixels.forEach(function (pixel) {
+    dots.push(new _Dot__WEBPACK_IMPORTED_MODULE_0__["default"](pixel.x, pixel.y, pixel.r, pixel.g, pixel.b, 0, 0));
+  });
+  c.clearRect(0, 0, innerHeight, innerWidth);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    dots.forEach(function (dot) {
+      dot.draw(c);
+      dot.x++;
+    });
+  }
+
+  animate();
 });
-addEventListener('resize', function () {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  init();
-}); // Objects
-
-var _Object =
-/*#__PURE__*/
-function () {
-  function Object(x, y, radius, color) {
-    _classCallCheck(this, Object);
-
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.color = color;
-  }
-
-  _createClass(Object, [{
-    key: "draw",
-    value: function draw() {
-      c.beginPath();
-      c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      c.fillStyle = this.color;
-      c.fill();
-      c.closePath();
-    }
-  }, {
-    key: "update",
-    value: function update() {
-      this.draw();
-    }
-  }]);
-
-  return Object;
-}(); // Implementation
-
-
-var objects;
-
-function init() {
-  objects = [];
-
-  for (var i = 0; i < 400; i++) {// objects.push()
-  }
-} // Animation Loop
-
-
-function animate() {
-  requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height);
-  c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y); // objects.forEach(object => {
-  //  object.update()
-  // })
-}
-
-init();
-animate();
-
-/***/ }),
-
-/***/ "./src/js/utils.js":
-/*!*************************!*\
-  !*** ./src/js/utils.js ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function randomIntFromRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function randomColor(colors) {
-  return colors[Math.floor(Math.random() * colors.length)];
-}
-
-function distance(x1, y1, x2, y2) {
-  var xDist = x2 - x1;
-  var yDist = y2 - y1;
-  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-}
-
-module.exports = {
-  randomIntFromRange: randomIntFromRange,
-  randomColor: randomColor,
-  distance: distance
-};
 
 /***/ })
 
