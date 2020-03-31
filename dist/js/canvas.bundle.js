@@ -124,9 +124,7 @@ addEventListener('resize', function () {
   init();
 }); // Objects
 
-var _Object =
-/*#__PURE__*/
-function () {
+var _Object = /*#__PURE__*/function () {
   function Object(x, y, radius, color) {
     _classCallCheck(this, Object);
 
