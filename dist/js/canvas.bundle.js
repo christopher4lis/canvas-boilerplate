@@ -104,6 +104,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+
+
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 canvas.width = innerWidth;
@@ -122,19 +124,20 @@ addEventListener('resize', function () {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
   init();
-}); // Objects
+}); // Ball class for constructing balls on the screen.
 
-var _Object = /*#__PURE__*/function () {
-  function Object(x, y, radius, color) {
-    _classCallCheck(this, Object);
+var Ball = /*#__PURE__*/function () {
+  function Ball(x, y, dy, radius, color) {
+    _classCallCheck(this, Ball);
 
     this.x = x;
     this.y = y;
+    this.dy = dy;
     this.radius = radius;
     this.color = color;
   }
 
-  _createClass(Object, [{
+  _createClass(Ball, [{
     key: "draw",
     value: function draw() {
       c.beginPath();
@@ -146,30 +149,43 @@ var _Object = /*#__PURE__*/function () {
   }, {
     key: "update",
     value: function update() {
+      if (this.y + this.radius > canvas.height) {
+        this.dy = -this.dy;
+      } else {
+        this.y += this.dy;
+      }
+
+      this.y += 1;
       this.draw();
     }
   }]);
 
-  return Object;
+  return Ball;
 }(); // Implementation
 
 
-var objects;
+var ballArray = [];
 
 function init() {
-  objects = [];
+  var x = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["randomIntFromRange"])(0, canvas.width);
+  var y = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["randomIntFromRange"])(0, canvas.height);
+  var dy = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["randomIntFromRange"])(0, 4);
+  var rad = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["randomIntFromRange"])(10, 50);
+  var color = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["randomColor"])(colors);
 
-  for (var i = 0; i < 400; i++) {// objects.push()
+  for (var i = 0; i < 400; i++) {
+    ballArray.push(new Ball(x, y, dy, rad, color));
   }
 } // Animation Loop
 
 
 function animate() {
   requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height);
-  c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y); // objects.forEach(object => {
-  //  object.update()
-  // })
+  c.clearRect(0, 0, canvas.width, canvas.height); // c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y);
+
+  ballArray.forEach(function (Ball) {
+    Ball.update();
+  });
 }
 
 init();
