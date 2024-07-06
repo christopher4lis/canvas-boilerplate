@@ -11,17 +11,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "babel-loader": "^8.1.0",
-    "browser-sync": "^2.26.7",
-    "browser-sync-webpack-plugin": "^2.2.2",
+    "browser-sync": "2.29.3",
+    "browser-sync-webpack-plugin": "^2.3.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.0.3",
     "prettier": "^2.0.2",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
   }
 }
